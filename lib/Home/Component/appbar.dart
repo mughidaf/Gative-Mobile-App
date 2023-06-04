@@ -128,32 +128,25 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/ryujin2.jpg", fit: BoxFit.cover)), //gambar produk
+                          Container(height: 200, width: 150, child: Image.network("assets/slide/ryujin2.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Container(
-                            width: 170,
-                            child: OutlinedButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
-                                CupertinoIcons.plus,
-                                size: 24.0,
-                              ),
-                              label: const Text("Wishlist"),
-                              style: OutlinedButton.styleFrom(
-                                side: BorderSide(
-                                  width: 1.0,
-                                  color: Color(0xFFFF1F57),
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                padding: EdgeInsets.all(15),
-                                foregroundColor: Color(0xFFFF1F57),
-                                textStyle: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Center(
+                            child: Container(
+                              child: OutlinedButton(
+                                onPressed: () {},
+                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 18),
+                                  backgroundColor: Color(0xFFFFFAC42),
+                                  textStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
@@ -170,10 +163,29 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/haerin1.jpg", fit: BoxFit.cover)),
+                          Container(height: 200, width: 150, child: Image.network("assets/slide/haerin1.jpg", fit: BoxFit.cover)),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Center(
+                            child: Container(
+                              child: OutlinedButton(
+                                onPressed: () {},
+                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 18),
+                                  backgroundColor: Color(0xFFFFFAC42),
+                                  textStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -186,7 +198,7 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/yeji1.jpg", fit: BoxFit.cover)),
+                          Container(height: 200, width: 150, child: Image.network("networks/slide/yeji1.jpg", fit: BoxFit.cover)),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
@@ -221,42 +233,99 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/yeji1.jpg", fit: BoxFit.cover)),
+                          Container(height: 200, width: 150, child: Image.network("assets/slide/ryujin1.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Center(
+                            child: Container(
+                              child: OutlinedButton(
+                                onPressed: () {},
+                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 18),
+                                  backgroundColor: Color(0xFFFFFAC42),
+                                  textStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
-                    Container(
+                                        Container(
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      height: 250,
+                      height: 200,
                       width: 150,
                       color: Color(0xFF333333),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/ryujin1.jpg", fit: BoxFit.cover)),
+                          Container(height: 200, width: 150, child: Image.network("assets/slide/yeji1.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Center(
+                            child: Container(
+                              child: OutlinedButton(
+                                onPressed: () {},
+                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 18),
+                                  backgroundColor: Color(0xFFFFFAC42),
+                                  textStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
-                    Container(
+                                        Container(
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      height: 250,
+                      height: 200,
                       width: 150,
                       color: Color(0xFF333333),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/pp.jpg", fit: BoxFit.cover)),
+                          Container(height: 200, width: 150, child: Image.network("assets/slide/aa.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Center(
+                            child: Container(
+                              child: OutlinedButton(
+                                onPressed: () {},
+                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 18),
+                                  backgroundColor: Color(0xFFFFFAC42),
+                                  textStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
