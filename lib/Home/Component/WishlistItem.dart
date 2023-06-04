@@ -23,7 +23,7 @@ class WishlistItem extends StatelessWidget {
                   height: 80,
                   width: 80,
                   margin: EdgeInsets.only(right: 15),
-                  child: Image.asset("image/asf.jpg"),
+                  child: Image.asset("assets/slide/yeji1.jpg"),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),

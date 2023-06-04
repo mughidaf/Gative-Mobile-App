@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:gative_mobile_ver/Home/Component/CartItem.dart';
+import 'package:gative_mobile_ver/Home/Component/WishlistItem.dart';
 
 class Sidebar extends StatelessWidget {
   @override
@@ -51,14 +53,17 @@ class Sidebar extends StatelessWidget {
               ),
               ListTile(
                 title: Text('Shopping Cart'),
-                onTap: () {
-                  // Handle item 
+                onLongPress: () {
+                   
                 },
               ),
               ListTile(
                 title: Text('Wishlist'),
                 onTap: () {
-                  // Handle item 
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const WishlistItem()),
+                  );
                 },
               ),
               ListTile(
@@ -128,7 +133,7 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.network("assets/slide/ryujin2.jpg", fit: BoxFit.cover)), //gambar produk
+                          Container(height: 200, width: 150, child: Image.asset("assets/slide/ryujin2.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
@@ -163,7 +168,7 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.network("assets/slide/haerin1.jpg", fit: BoxFit.cover)),
+                          Container(height: 200, width: 150, child: Image.asset("assets/slide/haerin1.jpg", fit: BoxFit.cover)),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
@@ -198,7 +203,7 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.network("networks/slide/yeji1.jpg", fit: BoxFit.cover)),
+                          Container(height: 200, width: 150, child: Image.asset("assets/slide/yeji1.jpg", fit: BoxFit.cover)),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
@@ -233,7 +238,7 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.network("assets/slide/ryujin1.jpg", fit: BoxFit.cover)), //gambar produk
+                          Container(height: 200, width: 150, child: Image.asset("assets/slide/ryujin1.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
@@ -268,7 +273,7 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.network("assets/slide/yeji1.jpg", fit: BoxFit.cover)), //gambar produk
+                          Container(height: 200, width: 150, child: Image.asset("assets/slide/yeji1.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
@@ -303,7 +308,7 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.network("assets/slide/aa.jpg", fit: BoxFit.cover)), //gambar produk
+                          Container(height: 200, width: 150, child: Image.asset("assets/slide/aa.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
