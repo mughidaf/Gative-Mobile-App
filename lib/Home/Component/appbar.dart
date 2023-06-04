@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -21,7 +22,7 @@ class Sidebar extends StatelessWidget {
           ),
           actions: <Widget>[
             CircleAvatar(
-              backgroundImage: AssetImage('assets/do.webp'),
+              backgroundImage: AssetImage('assets/do.webp'), //buat foto profil
             ),
             SizedBox(width: 10),
           ],
@@ -45,25 +46,25 @@ class Sidebar extends StatelessWidget {
               ListTile(
                 title: Text('Category'),
                 onTap: () {
-                  // Handle item 1 press
+                  // Handle item 
                 },
               ),
               ListTile(
                 title: Text('Shopping Cart'),
                 onTap: () {
-                  // Handle item 2 press
+                  // Handle item 
                 },
               ),
               ListTile(
                 title: Text('Wishlist'),
                 onTap: () {
-                  // Handle item 3 press
+                  // Handle item 
                 },
               ),
               ListTile(
                 title: Text('Forum'),
                 onTap: () {
-                  // Handle item 4 press
+                  // Handle item 
                 },
               ),
             ],
@@ -81,7 +82,7 @@ class Sidebar extends StatelessWidget {
                       aspectRatio: 16 / 9,
                       autoPlay: true,
                       ),
-                  items: [
+                  items: [ //gambar banner
                     "assets/slide/banner1.jpg",
                     "assets/slide/banner1.jpg",
                   ].map((i) {
@@ -127,10 +128,36 @@ class Sidebar extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/ryujin2.jpg", fit: BoxFit.cover)),
+                          Container(height: 200, width: 150, child: Image.asset("assets/slide/ryujin2.jpg", fit: BoxFit.cover)), //gambar produk
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
                           Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Container(
+                            width: 170,
+                            child: OutlinedButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(
+                                CupertinoIcons.plus,
+                                size: 24.0,
+                              ),
+                              label: const Text("Wishlist"),
+                              style: OutlinedButton.styleFrom(
+                                side: BorderSide(
+                                  width: 1.0,
+                                  color: Color(0xFFFF1F57),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                padding: EdgeInsets.all(15),
+                                foregroundColor: Color(0xFFFF1F57),
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),

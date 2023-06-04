@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Gative",
       theme: ThemeData(
-        primaryColor: Colors.blue,
+        
       ),
       home: Sidebar(),
     );
