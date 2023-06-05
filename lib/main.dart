@@ -12,10 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Gative",
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        
       ),
-      home: Sidebar(),
+      home: HomePage(),
     );
   }
 }
+
+

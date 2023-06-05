@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:gative_mobile_ver/Home/Component/CartItem.dart';
-import 'package:gative_mobile_ver/Home/Component/WishlistItem.dart';
-
-class Sidebar extends StatelessWidget {
+import 'package:gative_mobile_ver/Home/Component/CarouselDetailItem.dart';
+import 'package:gative_mobile_ver/Home/pages/DetailItemPage.dart';
+import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
+import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
+import 'package:sidebarx/sidebarx.dart';
+import 'package:gative_mobile_ver/Home/Component/drawer.dart';
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,45 +39,9 @@ class Sidebar extends StatelessWidget {
             ),
           ),
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              DrawerHeader(
-                child: Text('Sidebar'),
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                ),
-              ),
-              ListTile(
-                title: Text('Category'),
-                onTap: () {
-                  // Handle item 
-                },
-              ),
-              ListTile(
-                title: Text('Shopping Cart'),
-                onLongPress: () {
-                   
-                },
-              ),
-              ListTile(
-                title: Text('Wishlist'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const WishlistItem()),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text('Forum'),
-                onTap: () {
-                  // Handle item 
-                },
-              ),
-            ],
-          ),
+        drawer: Sidebar(
         ),
+        
         body: SingleChildScrollView(
           child: Column(
             children: [

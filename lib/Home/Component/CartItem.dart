@@ -68,7 +68,7 @@ class CartItem extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: 40,
+                  width: 19,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
@@ -108,7 +108,6 @@ class CartItem extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(4),
                             child: Icon(
                               CupertinoIcons.plus,
                               size: 14,

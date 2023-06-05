@@ -13,9 +13,9 @@ class _CarouselDetailItemState extends State<CarouselDetailItem> {
   late PageController _pageController;
 
   List<String> images = [
-    "image/1.jpg",
-    "image/asf.jpg",
-    "image/download.jpeg",
+    "assets/slide/banner1.jpg",
+    "assets/slide/banner1.jpg",
+    "assets/slide/banner1.jpg",
   ];
 
   int activePage = 0;
@@ -23,7 +23,7 @@ class _CarouselDetailItemState extends State<CarouselDetailItem> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
+    _pageController = PageController(viewportFraction: 0.9);
   }
 
   @override
@@ -49,7 +49,8 @@ class _CarouselDetailItemState extends State<CarouselDetailItem> {
         ),
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: indicators(images.length, activePage))
+            children: indicators(images.length, activePage)
+        )
       ],
     );
   }
