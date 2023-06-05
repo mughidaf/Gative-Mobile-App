@@ -5,8 +5,8 @@ import 'package:gative_mobile_ver/Home/Component/CarouselDetailItem.dart';
 import 'package:gative_mobile_ver/Home/pages/DetailItemPage.dart';
 import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
 import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
-import 'package:sidebarx/sidebarx.dart';
 import 'package:gative_mobile_ver/Home/Component/drawer.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        drawer: Sidebar(
-        ),
-        
+        drawer: Sidebar(),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -49,12 +47,13 @@ class HomePage extends StatelessWidget {
                 height: 200.0,
                 child: CarouselSlider(
                   options: CarouselOptions(
-                      height: 200.0,
-                      viewportFraction: 0.9,
-                      aspectRatio: 16 / 9,
-                      autoPlay: true,
-                      ),
-                  items: [ //gambar banner
+                    height: 200.0,
+                    viewportFraction: 0.9,
+                    aspectRatio: 16 / 9,
+                    autoPlay: true,
+                  ),
+                  items: [
+                    //gambar banner
                     "assets/slide/banner1.jpg",
                     "assets/slide/banner1.jpg",
                   ].map((i) {
@@ -81,7 +80,10 @@ class HomePage extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Text(
                     'New Deals',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -100,15 +102,42 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/ryujin2.jpg", fit: BoxFit.cover)), //gambar produk
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Container(
+                              height: 200,
+                              width: 150,
+                              child: Image.asset("assets/slide/ryujin2.jpg",
+                                  fit: BoxFit.cover)), //gambar produk
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text("my gf",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Headset",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Rp 69696969",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
                           Center(
                             child: Container(
                               child: OutlinedButton(
                                 onPressed: () {},
-                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                child: Text("Add To Cart",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white)),
                                 style: OutlinedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
@@ -135,15 +164,42 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/haerin1.jpg", fit: BoxFit.cover)),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Container(
+                              height: 200,
+                              width: 150,
+                              child: Image.asset("assets/slide/haerin1.jpg",
+                                  fit: BoxFit.cover)),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text("my gf",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Headset",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Rp 69696969",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
                           Center(
                             child: Container(
                               child: OutlinedButton(
                                 onPressed: () {},
-                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                child: Text("Add To Cart",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white)),
                                 style: OutlinedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
@@ -170,10 +226,35 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/yeji1.jpg", fit: BoxFit.cover)),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Container(
+                              height: 200,
+                              width: 150,
+                              child: Image.asset("assets/slide/yeji1.jpg",
+                                  fit: BoxFit.cover)),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text("my gf",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Headset",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 6),
+                              child: Text("Rp 69696969",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
                         ],
                       ),
                     ),
@@ -186,7 +267,10 @@ class HomePage extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Text(
                     'New Deals',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -205,15 +289,42 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/ryujin1.jpg", fit: BoxFit.cover)), //gambar produk
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Container(
+                              height: 200,
+                              width: 150,
+                              child: Image.asset("assets/slide/ryujin1.jpg",
+                                  fit: BoxFit.cover)), //gambar produk
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text("my gf",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Headset",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Rp 69696969",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
                           Center(
                             child: Container(
                               child: OutlinedButton(
                                 onPressed: () {},
-                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                child: Text("Add To Cart",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white)),
                                 style: OutlinedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
@@ -231,7 +342,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                                        Container(
+                    Container(
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       height: 200,
@@ -240,15 +351,42 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/yeji1.jpg", fit: BoxFit.cover)), //gambar produk
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Container(
+                              height: 200,
+                              width: 150,
+                              child: Image.asset("assets/slide/yeji1.jpg",
+                                  fit: BoxFit.cover)), //gambar produk
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text("my gf",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Headset",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Rp 69696969",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
                           Center(
                             child: Container(
                               child: OutlinedButton(
                                 onPressed: () {},
-                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                child: Text("Add To Cart",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white)),
                                 style: OutlinedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
@@ -266,7 +404,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                                        Container(
+                    Container(
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       height: 200,
@@ -275,15 +413,42 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(height: 200, width: 150, child: Image.asset("assets/slide/aa.jpg", fit: BoxFit.cover)), //gambar produk
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),child: Text("my gf",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Headset",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400, color: Colors.white))),
-                          Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),child: Text("Rp 69696969",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Colors.white))),
+                          Container(
+                              height: 200,
+                              width: 150,
+                              child: Image.asset("assets/slide/aa.jpg",
+                                  fit: BoxFit.cover)), //gambar produk
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: Text("my gf",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Headset",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: Text("Rp 69696969",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white))),
                           Center(
                             child: Container(
                               child: OutlinedButton(
                                 onPressed: () {},
-                                child: Text("Add To Cart", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                                child: Text("Add To Cart",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white)),
                                 style: OutlinedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
