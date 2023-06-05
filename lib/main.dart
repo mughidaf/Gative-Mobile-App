@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gative_mobile_ver/Home/Component/appbar.dart';
 
 import 'Home/pages/LoginPage.dart';
+import 'Home/pages/RegisterPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: "Gative",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(),
-      home: LoginPage(),
+      home: RegisterPage(),
     );
   }
 }
