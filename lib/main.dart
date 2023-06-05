@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Gative",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(
+        fontFamily: 'Montserrat',
+      ),
       home: RegisterPage(),
     );
   }
