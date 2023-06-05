@@ -7,7 +7,7 @@ class RegisterPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/Login.png'),
+            image: AssetImage('assets/Register.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -160,7 +160,7 @@ class RegisterPage extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
+                      MaterialStateProperty.all<Color>(Colors.orange),
                   minimumSize: MaterialStateProperty.all<Size>(
                       Size(double.infinity, 48)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
