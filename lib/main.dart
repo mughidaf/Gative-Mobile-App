@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gative_mobile_ver/Home/Component/appbar.dart';
-
-import 'Home/pages/LoginPage.dart';
-import 'Home/pages/RegisterPage.dart';
+import 'package:gative_mobile_ver/Home/pages/DetailItemPage.dart';
+import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
+import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
+import 'package:gative_mobile_ver/Home/pages/LoginPage.dart';
+import 'package:gative_mobile_ver/Home/pages/RegisterPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +21,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Montserrat',
       ),
-      home: RegisterPage(),
+      initialRoute: '/',
+      routes: {
+        '/home': (context) => HomePage(),
+        '/': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
+        '/detail': (context) => DetailItemPage(),
+        '/wishlist': (context) => WishlistPage(),
+        '/cart': (context) => CartPage(),
+      },
     );
   }
 }

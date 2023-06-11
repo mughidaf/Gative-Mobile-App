@@ -189,6 +189,7 @@ class RegisterPage extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       // Logika untuk tombol login
+                      Navigator.pushNamed(context, '/login');
                     },
                     child: Text(
                       'Login',

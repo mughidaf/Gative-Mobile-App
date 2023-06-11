@@ -81,6 +81,7 @@ class LoginPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Logika untuk tombol login
+                Navigator.pushNamed(context, '/home');
               },
               style: ButtonStyle(
                 backgroundColor:
@@ -106,6 +107,7 @@ class LoginPage extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     // Logika untuk tombol register
+                    Navigator.pushNamed(context, '/register');
                   },
                   child: Text('Register'),
                 ),
