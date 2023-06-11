@@ -6,8 +6,30 @@ import 'package:gative_mobile_ver/Home/pages/DetailItemPage.dart';
 import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
 import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
 import 'package:gative_mobile_ver/Home/Component/drawer.dart';
+import 'package:gative_mobile_ver/Models/UserController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String nama = 'Loading...';
+  void tampilNama() async {
+    UserController UC = UserController();
+    await UC.getName();
+    setState(() {
+      nama = UC.nama;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    tampilNama();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,7 +56,8 @@ class HomePage extends StatelessWidget {
           title: Align(
             alignment: Alignment.centerRight,
             child: Text(
-              'hello user',
+              // ignore: prefer_interpolation_to_compose_strings
+              ('Hello, ' + nama),
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ),
@@ -44,7 +67,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text('Pari gf'),
+                accountName: Text(nama),
                 accountEmail: Text('pari@gmail.com'),
                 currentAccountPicture: Container(
                   decoration: BoxDecoration(
@@ -85,8 +108,14 @@ class HomePage extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.logout),
                 title: Text("Logout"),
-                onTap: () {
-                  Navigator.pushNamed(context, '/');
+                onTap: () async {
+                  // Menghapus data dari SharedPreferences
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.clear();
+                  // Mengarahkan pengguna kembali ke halaman login
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/', (route) => false);
                 },
               )
             ],

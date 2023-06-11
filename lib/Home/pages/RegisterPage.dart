@@ -1,6 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatelessWidget {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<bool> registerUser(
+      String name, String email, String username, String password) async {
+    var url = Uri.parse(
+        'http://192.168.0.11:8000/api/register'); // Ganti URL dengan endpoint registrasi API Laravel Anda
+
+    var response = await http.post(
+      url,
+      body: {
+        'name': name,
+        'email': email,
+        'username': username,
+        'password': password,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // Registrasi berhasil
+      print('Registrasi berhasil');
+      return true;
+      // Lakukan tindakan lain yang diperlukan setelah registrasi berhasil
+    } else {
+      // Registrasi gagal
+      print('Registrasi gagal');
+      return false;
+      // Lakukan tindakan lain yang diperlukan setelah registrasi gagal
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +87,7 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: nameController,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -74,6 +109,7 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: emailController,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -95,6 +131,7 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: usernameController,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -116,6 +153,7 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: passwordController,
                   obscureText: true,
                   style: TextStyle(
                     color: Colors.white,
@@ -155,8 +193,18 @@ class RegisterPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   // Logika untuk tombol register
+                  var hasil = await registerUser(
+                      nameController.text,
+                      emailController.text,
+                      usernameController.text,
+                      passwordController.text);
+                  if (hasil == true) {
+                    Navigator.pushNamed(context, '/');
+                  } else {
+                    print('Login gagal!');
+                  }
                 },
                 style: ButtonStyle(
                   backgroundColor:
@@ -189,7 +237,7 @@ class RegisterPage extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       // Logika untuk tombol login
-                      Navigator.pushNamed(context, '/login');
+                      Navigator.pushNamed(context, '/');
                     },
                     child: Text(
                       'Login',

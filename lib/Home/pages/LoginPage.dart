@@ -1,6 +1,51 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class LoginPage extends StatelessWidget {
+import 'package:gative_mobile_ver/Models/UserController.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final UserController UC = UserController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<bool> login(String username, String password) async {
+    try {
+      var url = Uri.parse(
+          'http://192.168.0.11:8000/api/login'); // Ganti dengan URL API login Laravel kamu
+      var response = await http.post(
+        url,
+        body: {
+          'username': username,
+          'password': password,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Login berhasil, lakukan sesuatu, seperti navigasi ke halaman utama
+        var respon = json.decode(response.body);
+        UC.setData(respon['data']['id'], respon['data']['name'],
+            respon['data']['username'], respon['data']['profile']);
+        print('berhasil');
+        return true;
+      } else {
+        // Login gagal, tampilkan pesan kesalahan
+        print('Login gagal. Status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      // Terjadi kesalahan saat melakukan permintaan HTTP
+      print('Terjadi kesalahan: $error');
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +98,7 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextField(
+                controller: usernameController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Username',
@@ -68,6 +114,7 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -79,9 +126,15 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Logika untuk tombol login
-                Navigator.pushNamed(context, '/home');
+                var hasil = await login(
+                    usernameController.text, passwordController.text);
+                if (hasil == true) {
+                  Navigator.pushNamed(context, '/home');
+                } else {
+                  print('Login gagal!');
+                }
               },
               style: ButtonStyle(
                 backgroundColor:
