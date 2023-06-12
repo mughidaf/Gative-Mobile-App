@@ -6,8 +6,11 @@ import 'package:gative_mobile_ver/Home/pages/DetailItemPage.dart';
 import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
 import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
 import 'package:gative_mobile_ver/Home/Component/drawer.dart';
+import 'package:gative_mobile_ver/Models/Item.dart';
 import 'package:gative_mobile_ver/Models/UserController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,7 +21,10 @@ class _HomePageState extends State<HomePage> {
   String nama = 'Loading...';
   String email = 'Loading...';
   String username = 'Loading...';
-  int userid = 1;
+  int userid = 0;
+  List<Item> items = [];
+  List<String> kategori = ['', 'Video Games', 'Gaming gear', 'Others'];
+
   void tampilNama() async {
     UserController UC = UserController();
     await UC.getData();
@@ -30,10 +36,53 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future<List<Item>> fetchItems() async {
+    final response =
+        await http.get(Uri.parse('http://192.168.0.11:8000/api/items'));
+
+    if (response.statusCode == 200) {
+      // Jika respons API sukses (status code 200), proses data yang diterima
+      final jsonData = jsonDecode(response.body);
+      final itemsData = jsonData['items'];
+      List<Item> fetchedItems = [];
+
+      for (var itemData in itemsData) {
+        Item item = Item(
+          id: itemData['id'],
+          categoryId: itemData['Category_id'],
+          name: itemData['name'],
+          description: itemData['description'],
+          price: double.parse(itemData['price']),
+          image: itemData['image'],
+        );
+        fetchedItems.add(item);
+      }
+      print('Berhasil fetching');
+      return fetchedItems;
+    } else {
+      // Jika respons API gagal, lempar exception atau lakukan penanganan error sesuai kebutuhan
+      throw Exception('Failed to fetch data from API');
+    }
+  }
+
+  Future<void> loadItems() async {
+    try {
+      List<Item> fetchedItems = await fetchItems();
+      setState(() {
+        items = fetchedItems;
+      });
+      print('berhasil item');
+    } catch (e) {
+      // Penanganan error ketika gagal memuat data
+      print('Error : $e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     tampilNama();
+    loadItems();
   }
 
   @override
@@ -75,7 +124,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(nama),
+                accountName: Text(username),
                 accountEmail: Text(email),
                 currentAccountPicture: Container(
                   decoration: BoxDecoration(
@@ -180,10 +229,11 @@ class _HomePageState extends State<HomePage> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 330,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    Container(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return Container(
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       height: 200,
@@ -193,41 +243,58 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                              height: 200,
-                              width: 150,
-                              child: Image.asset("assets/slide/ryujin2.jpg",
-                                  fit: BoxFit.cover)), //gambar produk
+                            height: 200,
+                            width: 150,
+                            child: Image.network(
+                              "http://192.168.0.11:8000/api/gambarBarang/${items[index].id}",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                           Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text("my gf",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white))),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            child: Text(
+                              items[index].name,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                           Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Headset",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 0),
+                            child: Text(
+                              kategori[items[index].categoryId],
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                           Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Rp 69696969",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 0),
+                            child: Text(
+                              "Rp ${items[index].price}",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                           Center(
                             child: Container(
                               child: OutlinedButton(
                                 onPressed: () {},
-                                child: Text("Add To Cart",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: Colors.white)),
+                                child: Text(
+                                  "Add To Cart",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 style: OutlinedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
@@ -241,322 +308,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
-                    ),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      height: 200,
-                      width: 150,
-                      color: Color(0xFF333333),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              height: 200,
-                              width: 150,
-                              child: Image.asset("assets/slide/haerin1.jpg",
-                                  fit: BoxFit.cover)),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text("my gf",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Headset",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Rp 69696969",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Center(
-                            child: Container(
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: Text("Add To Cart",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: Colors.white)),
-                                style: OutlinedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  padding: EdgeInsets.symmetric(horizontal: 18),
-                                  backgroundColor: Color(0xFFFFFAC42),
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      height: 250,
-                      width: 150,
-                      color: Color(0xFF333333),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              height: 200,
-                              width: 150,
-                              child: Image.asset("assets/slide/yeji1.jpg",
-                                  fit: BoxFit.cover)),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text("my gf",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Headset",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 6),
-                              child: Text("Rp 69696969",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'New Deals',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 330,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      height: 200,
-                      width: 150,
-                      color: Color(0xFF333333),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              height: 200,
-                              width: 150,
-                              child: Image.asset("assets/slide/ryujin1.jpg",
-                                  fit: BoxFit.cover)), //gambar produk
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text("my gf",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Headset",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Rp 69696969",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Center(
-                            child: Container(
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: Text("Add To Cart",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: Colors.white)),
-                                style: OutlinedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  padding: EdgeInsets.symmetric(horizontal: 18),
-                                  backgroundColor: Color(0xFFFFFAC42),
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      height: 200,
-                      width: 150,
-                      color: Color(0xFF333333),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              height: 200,
-                              width: 150,
-                              child: Image.asset("assets/slide/yeji1.jpg",
-                                  fit: BoxFit.cover)), //gambar produk
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text("my gf",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Headset",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Rp 69696969",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Center(
-                            child: Container(
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: Text("Add To Cart",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: Colors.white)),
-                                style: OutlinedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  padding: EdgeInsets.symmetric(horizontal: 18),
-                                  backgroundColor: Color(0xFFFFFAC42),
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      height: 200,
-                      width: 150,
-                      color: Color(0xFF333333),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              height: 200,
-                              width: 150,
-                              child: Image.asset("assets/slide/aa.jpg",
-                                  fit: BoxFit.cover)), //gambar produk
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text("my gf",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Headset",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 0),
-                              child: Text("Rp 69696969",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white))),
-                          Center(
-                            child: Container(
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: Text("Add To Cart",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: Colors.white)),
-                                style: OutlinedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  padding: EdgeInsets.symmetric(horizontal: 18),
-                                  backgroundColor: Color(0xFFFFFAC42),
-                                  textStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ],
