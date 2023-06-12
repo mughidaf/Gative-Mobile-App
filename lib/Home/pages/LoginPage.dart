@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
         // Login berhasil, lakukan sesuatu, seperti navigasi ke halaman utama
         var respon = json.decode(response.body);
         UC.setData(respon['data']['id'], respon['data']['name'],
-            respon['data']['username'], respon['data']['profile']);
+            respon['data']['username'], respon['data']['email']);
         print('berhasil');
         return true;
       } else {

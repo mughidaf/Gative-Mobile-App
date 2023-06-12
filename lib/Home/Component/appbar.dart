@@ -16,11 +16,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String nama = 'Loading...';
+  String email = 'Loading...';
+  String username = 'Loading...';
+  int userid = 1;
   void tampilNama() async {
     UserController UC = UserController();
-    await UC.getName();
+    await UC.getData();
     setState(() {
       nama = UC.nama;
+      email = UC.email;
+      username = UC.username;
+      userid = UC.id;
     });
   }
 
@@ -33,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xFF1A1A1A),
         appBar: AppBar(
@@ -49,7 +56,8 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: <Widget>[
             CircleAvatar(
-              backgroundImage: AssetImage('assets/do.webp'), //buat foto profil
+              backgroundImage: NetworkImage(
+                  'http://192.168.0.11:8000/api/avatar/$userid'), //buat foto profil
             ),
             SizedBox(width: 10),
           ],
@@ -68,11 +76,12 @@ class _HomePageState extends State<HomePage> {
             children: [
               UserAccountsDrawerHeader(
                 accountName: Text(nama),
-                accountEmail: Text('pari@gmail.com'),
+                accountEmail: Text(email),
                 currentAccountPicture: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/slide/ryujin1.jpg"),
+                        image: NetworkImage(
+                            'http://192.168.0.11:8000/api/avatar/$userid'),
                         fit: BoxFit.cover),
                     shape: BoxShape.circle,
                   ),
