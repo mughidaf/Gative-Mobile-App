@@ -7,7 +7,7 @@ import 'package:gative_mobile_ver/Home/pages/LoginPage.dart';
 import 'package:gative_mobile_ver/Home/pages/RegisterPage.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

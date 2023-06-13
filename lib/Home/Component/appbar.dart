@@ -9,6 +9,7 @@ import 'package:gative_mobile_ver/Home/Component/drawer.dart';
 import 'package:gative_mobile_ver/Models/Item.dart';
 import 'package:gative_mobile_ver/Models/UserController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -75,6 +76,17 @@ class _HomePageState extends State<HomePage> {
     } catch (e) {
       // Penanganan error ketika gagal memuat data
       print('Error : $e');
+    }
+  }
+
+  Future<bool> addCart(int id, int userid) async {
+    var url = Uri.parse('http://192.168.0.11:8000/api/addCart/${id}/${userid}');
+    var response = await http.post(url);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -242,12 +254,22 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 200,
-                            width: 150,
-                            child: Image.network(
-                              "http://192.168.0.11:8000/api/gambarBarang/${items[index].id}",
-                              fit: BoxFit.cover,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DetailItemPage()),
+                              );
+                            },
+                            child: Container(
+                              height: 200,
+                              width: 150,
+                              child: Image.network(
+                                "http://192.168.0.11:8000/api/gambarBarang/${items[index].id}",
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Padding(
@@ -289,7 +311,18 @@ class _HomePageState extends State<HomePage> {
                           Center(
                             child: Container(
                               child: OutlinedButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  var respon =
+                                      await addCart(items[index].id, userid);
+                                  if (respon == true) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CartPage()),
+                                    );
+                                  }
+                                },
                                 child: Text(
                                   "Add To Cart",
                                   textAlign: TextAlign.center,
