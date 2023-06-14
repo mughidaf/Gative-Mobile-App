@@ -7,6 +7,7 @@ import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
 import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
 import 'package:gative_mobile_ver/Home/Component/drawer.dart';
 import 'package:gative_mobile_ver/Models/Item.dart';
+import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
 import 'package:gative_mobile_ver/Models/UserController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
       email = UC.email;
       username = UC.username;
       userid = UC.id;
+      LoggedinUser.id = userid;
     });
   }
 
@@ -183,6 +185,7 @@ class _HomePageState extends State<HomePage> {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   await prefs.clear();
+                  LoggedinUser.id = 0;
                   // Mengarahkan pengguna kembali ke halaman login
                   Navigator.pushNamedAndRemoveUntil(
                       context, '/', (route) => false);
