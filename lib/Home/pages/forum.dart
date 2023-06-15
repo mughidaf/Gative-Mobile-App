@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gative_mobile_ver/Home/pages/incomment.dart';
+import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
 
 class forum extends StatefulWidget {
   const forum({super.key, required this.title});
@@ -20,6 +21,8 @@ class forum extends StatefulWidget {
 }
 
 class _forum extends State<forum> {
+  String username = LoggedinUser.username;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +49,8 @@ class _forum extends State<forum> {
               ],
             ),
             Wrap(
-              children: const [
-                Text("Hello, User"),
+              children: [
+                Text(('Hello, $username')),
                 SizedBox(
                   width: 10,
                 ),
@@ -174,20 +177,20 @@ class _forum extends State<forum> {
                             },
                             child: Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.favorite,
-                                  color: Color(0xffCD1818),
-                                  size: 35,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "12",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
+                              // children: [
+                              //   Icon(
+                              //     Icons.favorite,
+                              //     color: Color(0xffCD1818),
+                              //     size: 35,
+                              //   ),
+                              //   SizedBox(
+                              //     width: 5,
+                              //   ),
+                              //   Text(
+                              //     "12",
+                              //     style: TextStyle(color: Colors.white),
+                              //   ),
+                              // ],
                             ),
                           ),
                           const SizedBox(
