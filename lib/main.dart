@@ -5,6 +5,7 @@ import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
 import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
 import 'package:gative_mobile_ver/Home/pages/LoginPage.dart';
 import 'package:gative_mobile_ver/Home/pages/RegisterPage.dart';
+import 'package:gative_mobile_ver/Home/pages/profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/detail': (context) => DetailItemPage(),
         '/wishlist': (context) => WishlistPage(),
         '/cart': (context) => CartPage(),
+        '/profile': (context) => ProfilePage(),
       },
     );
   }

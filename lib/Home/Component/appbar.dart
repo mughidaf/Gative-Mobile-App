@@ -177,6 +177,9 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 leading: Icon(Icons.account_box),
                 title: Text("Settings"),
+                onTap: () {
+                  Navigator.pushNamed(context, '/profile');
+                },
               ),
               ListTile(
                 leading: Icon(Icons.logout),
