@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gative_mobile_ver/Models/SelectedItem.dart';
 
 import '../Component/CarouselDetailItem.dart';
 import '../Component/DetailItem.dart';
@@ -35,7 +36,8 @@ class DetailItemPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                CarouselDetailItem(),
+                Image.network(
+                    "http://192.168.0.11:8000/api/gambarBarang/${SelectedItem.id}"),
                 DetailItem(),
               ],
             ),

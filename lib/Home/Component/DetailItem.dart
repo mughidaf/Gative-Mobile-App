@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gative_mobile_ver/Models/SelectedItem.dart';
 
 class DetailItem extends StatelessWidget {
   const DetailItem({super.key});
@@ -22,7 +23,7 @@ class DetailItem extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'Spongebob',
+                    SelectedItem.nama,
                     style: TextStyle(
                       fontSize: 28,
                       color: Color(0xFFFFFDFD),
@@ -54,7 +55,7 @@ class DetailItem extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: const Text('Video Games'),
+                    child: Text(SelectedItem.kategori),
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xFF333333),
                       padding: EdgeInsets.all(5),
@@ -89,7 +90,7 @@ class DetailItem extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
                       textAlign: TextAlign.justify,
-                      'asdsadsadsadasafwdafbuihowquwbqdbwqudbqwuidbwquiydbuwqidbuqwdbiqwbduqwdbqiwbdyqwyidby',
+                      '${SelectedItem.deskripsi}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFFFFFDFD),

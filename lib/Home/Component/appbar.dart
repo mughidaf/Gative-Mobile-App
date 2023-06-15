@@ -8,6 +8,7 @@ import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
 import 'package:gative_mobile_ver/Home/Component/drawer.dart';
 import 'package:gative_mobile_ver/Models/Item.dart';
 import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
+import 'package:gative_mobile_ver/Models/SelectedItem.dart';
 import 'package:gative_mobile_ver/Models/UserController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
@@ -259,6 +260,12 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           InkWell(
                             onTap: () {
+                              SelectedItem.id = items[index].id;
+                              SelectedItem.nama = items[index].name;
+                              SelectedItem.deskripsi = items[index].description;
+                              SelectedItem.harga = items[index].price;
+                              SelectedItem.kategori =
+                                  kategori[items[index].categoryId];
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

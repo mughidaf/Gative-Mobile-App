@@ -103,6 +103,25 @@ class _CartPageState extends State<CartPage> {
     await http.post(url);
   }
 
+  Future<void> deleteAllCarts(int userId) async {
+    final url = Uri.parse('http://192.168.0.11:8000/api/deleteAllCart/$userId');
+
+    try {
+      final response = await http.delete(url);
+
+      if (response.statusCode == 200) {
+        // Penghapusan berhasil
+        print('Semua data cart berhasil dihapus');
+      } else {
+        // Gagal menghapus data cart
+        print('Gagal menghapus data cart');
+      }
+    } catch (e) {
+      // Terjadi kesalahan pada permintaan HTTP
+      print('Error: $e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -315,8 +334,13 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                 ),
-                onTap: () {
-                  print("Click event on Container");
+                onTap: () async {
+                  await deleteAllCarts(LoggedinUser.id);
+                  setState(() {
+                    totalPrice = 0;
+                    items = [];
+                    cartId = [];
+                  });
                 },
               ),
             ],

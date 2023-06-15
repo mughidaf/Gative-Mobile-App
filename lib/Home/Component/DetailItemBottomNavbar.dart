@@ -1,8 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
+import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
+import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
+import 'package:gative_mobile_ver/Models/SelectedItem.dart';
+import 'package:http/http.dart' as http;
 
-class DetailItemBottomNavbar extends StatelessWidget {
+class DetailItemBottomNavbar extends StatefulWidget {
   const DetailItemBottomNavbar({super.key});
+
+  @override
+  State<DetailItemBottomNavbar> createState() => _DetailItemBottomNavbarState();
+}
+
+class _DetailItemBottomNavbarState extends State<DetailItemBottomNavbar> {
+  Future<bool> addCart(int id, int userid) async {
+    var url = Uri.parse('http://192.168.0.11:8000/api/addCart/${id}/${userid}');
+    var response = await http.post(url);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> addWishlist(int id, int userid) async {
+    var url =
+        Uri.parse('http://192.168.0.11:8000/api/addWishlist/${id}/${userid}');
+    await http.post(url);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +55,7 @@ class DetailItemBottomNavbar extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Rp150.000,00 ",
+                  "Rp${SelectedItem.harga.toInt()},00 ",
                   style: TextStyle(
                     color: Color(0xFFFF1F57),
                     fontSize: 20,
@@ -43,7 +70,17 @@ class DetailItemBottomNavbar extends StatelessWidget {
                 Container(
                   width: 170,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var respon =
+                          await addCart(SelectedItem.id, LoggedinUser.id);
+                      if (respon == true) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CartPage()),
+                        );
+                      }
+                    },
                     child: const Text('Add to Cart'),
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xFFFFAC42),
@@ -62,7 +99,14 @@ class DetailItemBottomNavbar extends StatelessWidget {
                 Container(
                   width: 170,
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await addWishlist(SelectedItem.id, LoggedinUser.id);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WishlistPage()),
+                      );
+                    },
                     icon: const Icon(
                       CupertinoIcons.plus,
                       size: 24.0,
