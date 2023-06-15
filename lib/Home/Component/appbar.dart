@@ -37,6 +37,8 @@ class _HomePageState extends State<HomePage> {
       username = UC.username;
       userid = UC.id;
       LoggedinUser.id = userid;
+      LoggedinUser.username = username;
+      LoggedinUser.email = email;
     });
   }
 
@@ -139,8 +141,8 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(username),
-                accountEmail: Text(email),
+                accountName: Text(LoggedinUser.username),
+                accountEmail: Text(LoggedinUser.email),
                 currentAccountPicture: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
