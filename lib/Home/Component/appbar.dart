@@ -184,6 +184,13 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
+                leading: Icon(Icons.chat_rounded),
+                title: Text("Forum"),
+                onTap: () {
+                  Navigator.pushNamed(context, '/forum');
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.logout),
                 title: Text("Logout"),
                 onTap: () async {
