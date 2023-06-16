@@ -39,7 +39,7 @@ class _CartPageState extends State<CartPage> {
 
   Future<List<Item>> fetchItems(int id) async {
     final response = await http
-        .get(Uri.parse('http://192.168.0.11:8000/api/cartPage/${id}'));
+        .get(Uri.parse('http://192.168.0.104:8000/api/cartPage/${id}'));
 
     if (response.statusCode == 200) {
       // Jika respons API sukses (status code 200), proses data yang diterima
@@ -84,7 +84,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   void deleteCartItem(int id) async {
-    String apiUrl = 'http://192.168.0.11:8000/api/deleteCart/$id';
+    String apiUrl = 'http://192.168.0.104:8000/api/deleteCart/$id';
 
     var response = await http.delete(Uri.parse(apiUrl));
 
@@ -99,12 +99,13 @@ class _CartPageState extends State<CartPage> {
 
   Future<void> addWishlist(int id, int userid) async {
     var url =
-        Uri.parse('http://192.168.0.11:8000/api/addWishlist/${id}/${userid}');
+        Uri.parse('http://192.168.0.104:8000/api/addWishlist/${id}/${userid}');
     await http.post(url);
   }
 
   Future<void> deleteAllCarts(int userId) async {
-    final url = Uri.parse('http://192.168.0.11:8000/api/deleteAllCart/$userId');
+    final url =
+        Uri.parse('http://192.168.0.104:8000/api/deleteAllCart/$userId');
 
     try {
       final response = await http.delete(url);
@@ -180,7 +181,7 @@ class _CartPageState extends State<CartPage> {
                                 width: 80,
                                 margin: EdgeInsets.only(right: 15),
                                 child: Image.network(
-                                    "http://192.168.0.11:8000/api/gambarBarang/${items[index].id}"),
+                                    "http://192.168.0.104:8000/api/gambarBarang/${items[index].id}"),
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),

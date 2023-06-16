@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         '/wishlist': (context) => WishlistPage(),
         '/cart': (context) => CartPage(),
         '/profile': (context) => ProfilePage(),
-        '/forum': (context) => forum(title: 'Forum Page'),
+        '/forum': (context) => forum(),
       },
     );
   }

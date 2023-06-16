@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class incomment extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -9,12 +12,56 @@ class incomment extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
-
+  final int post_id;
+  const incomment({required this.post_id, Key? key}) : super(key: key);
   @override
   State<incomment> createState() => _incomment();
 }
 
 class _incomment extends State<incomment> {
+  List<dynamic> replies = [];
+  int forumuser = 0;
+  String forumname = '';
+  String forumquestion = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchRepliesData();
+    fetchForumData();
+  }
+
+  Future<void> fetchForumData() async {
+    final response = await http.get(
+        Uri.parse('http://192.168.0.104:8000/api/forum/${widget.post_id}'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        forumuser = data['User_id'];
+        forumname = data['user']['username'];
+        forumquestion = data['question'];
+      });
+    } else {
+      // Handle error case
+      print('Failed to fetch forum data');
+    }
+  }
+
+  Future<void> fetchRepliesData() async {
+    final response = await http.get(Uri.parse(
+        'http://192.168.0.104:8000/api/forum/reply/${widget.post_id}'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        replies = data;
+      });
+    } else {
+      // Handle error case
+      print('Failed to fetch replies data');
+    }
+  }
+
+  int userid = LoggedinUser.id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,14 +88,14 @@ class _incomment extends State<incomment> {
               ],
             ),
             Wrap(
-              children: const [
-                Text("Hello, User"),
+              children: [
+                Text('Hello, ${LoggedinUser.username}'),
                 SizedBox(
                   width: 10,
                 ),
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Camila_Cabello_Vogue_4.jpg"),
+                      "http://192.168.0.104:8000/api/avatar/$userid"),
                   backgroundColor: Colors.transparent,
                   radius: 15,
                 ),
@@ -104,9 +151,9 @@ class _incomment extends State<incomment> {
                             children: [
                               Row(
                                 children: [
-                                  const CircleAvatar(
+                                  CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                        "https://upload.wikimedia.org/wikipedia/commons/a/ac/Camila_Cabello_Vogue_4.jpg"),
+                                        'http://192.168.0.104:8000/api/avatar/$forumuser'),
                                     backgroundColor: Colors.transparent,
                                     radius: 25,
                                   ),
@@ -114,7 +161,7 @@ class _incomment extends State<incomment> {
                                     width: 10,
                                   ),
                                   Text(
-                                    "Anissa27",
+                                    forumname,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors
@@ -135,10 +182,6 @@ class _incomment extends State<incomment> {
                                 itemBuilder: (context) {
                                   return [
                                     PopupMenuItem(
-                                      value: 'edit',
-                                      child: Text('edit'),
-                                    ),
-                                    PopupMenuItem(
                                       value: 'delete',
                                       child: Text('delete'),
                                     ),
@@ -148,11 +191,14 @@ class _incomment extends State<incomment> {
                             ],
                           ),
                         ),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                            style: TextStyle(color: Colors.white),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              forumquestion,
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                         Padding(
@@ -187,138 +233,96 @@ class _incomment extends State<incomment> {
                       ),
                     ),
                     child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 5),
-                          child: Wrap(
+                      children: replies.map((reply) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            color: Color(0xff686868),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
+                          child: Column(
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                      height: 40,
-                                      child: VerticalDivider(
-                                        color: Colors.black,
-                                        thickness: 2.0,
-                                      )),
-                                  CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        "https://upload.wikimedia.org/wikipedia/commons/a/ac/Camila_Cabello_Vogue_4.jpg"),
-                                    backgroundColor: Colors.transparent,
-                                    radius: 15,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 5),
+                                child: Wrap(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          "anissa27",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight
-                                                .bold, // Specify your desired text color
+                                        Container(
+                                          height: 40,
+                                          child: VerticalDivider(
+                                            color: Colors.black,
+                                            thickness: 2.0,
                                           ),
                                         ),
-                                        Text(
-                                          "@anissa27 comment testing!",
-                                          style: TextStyle(
-                                            color: Colors
-                                                .white, // Specify your desired text color
+                                        CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              'http://192.168.0.104:8000/api/avatar/${reply['user_id']}'),
+                                          backgroundColor: Colors.transparent,
+                                          radius: 15,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Expanded(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                reply['username'],
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                reply['reply_content'],
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ],
                                           ),
+                                        ),
+                                        PopupMenuButton(
+                                          icon: const Icon(
+                                            Icons.more_vert,
+                                            color: Color(0xffD9D9D9),
+                                          ),
+                                          onSelected: (value) {
+                                            // Handle menu item selection
+                                            print('Selected: $value');
+                                          },
+                                          itemBuilder: (context) {
+                                            return [
+                                              PopupMenuItem(
+                                                value: 'delete',
+                                                child: Text('delete'),
+                                              ),
+                                            ];
+                                          },
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  PopupMenuButton(
-                                    icon: const Icon(
-                                      size: 36,
-                                      Icons.more_vert,
-                                      color: Color(0xffD9D9D9),
-                                    ),
-                                    onSelected: (value) {
-                                      // Handle menu item selection
-                                      print('Selected: $value');
-                                    },
-                                    itemBuilder: (context) {
-                                      return [
-                                        PopupMenuItem(
-                                          value: 'edit',
-                                          child: Text('edit'),
-                                        ),
-                                        PopupMenuItem(
-                                          value: 'delete',
-                                          child: Text('delete'),
-                                        ),
-                                      ];
-                                    },
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                color: Color(0xff555555),
+                                thickness: 1.0,
                               ),
                             ],
                           ),
-                        ),
-                        Divider(
-                          color: Color(0xff555555),
-                          thickness: 1.0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 5),
-                          child: Wrap(
-                            children: [
-                              Row(
-                                children: const [
-                                  CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        "https://upload.wikimedia.org/wikipedia/commons/a/ac/Camila_Cabello_Vogue_4.jpg"),
-                                    backgroundColor: Colors.transparent,
-                                    radius: 15,
-                                  ),
-                                  Expanded(
-                                    child: Card(
-                                      color: Color(0xff333333),
-                                      child: SizedBox(
-                                        height: 35,
-                                        child: TextField(
-                                          style: TextStyle(
-                                            color: Colors
-                                                .white, // Specify your desired text color
-                                          ),
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    vertical: 8,
-                                                    horizontal: 12),
-                                            border: OutlineInputBorder(
-                                              borderSide: BorderSide.none,
-                                            ),
-                                            hintText: 'Enter Reply',
-                                            hintStyle: TextStyle(
-                                              color: Colors
-                                                  .white, // Specify your desired hint text color
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.send,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],

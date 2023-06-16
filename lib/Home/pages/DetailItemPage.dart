@@ -37,7 +37,7 @@ class DetailItemPage extends StatelessWidget {
             child: Column(
               children: [
                 Image.network(
-                    "http://192.168.0.11:8000/api/gambarBarang/${SelectedItem.id}"),
+                    "http://192.168.0.104:8000/api/gambarBarang/${SelectedItem.id}"),
                 DetailItem(),
               ],
             ),

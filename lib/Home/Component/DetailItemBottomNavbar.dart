@@ -15,7 +15,8 @@ class DetailItemBottomNavbar extends StatefulWidget {
 
 class _DetailItemBottomNavbarState extends State<DetailItemBottomNavbar> {
   Future<bool> addCart(int id, int userid) async {
-    var url = Uri.parse('http://192.168.0.11:8000/api/addCart/${id}/${userid}');
+    var url =
+        Uri.parse('http://192.168.0.104:8000/api/addCart/${id}/${userid}');
     var response = await http.post(url);
 
     if (response.statusCode == 200) {
@@ -27,7 +28,7 @@ class _DetailItemBottomNavbarState extends State<DetailItemBottomNavbar> {
 
   Future<void> addWishlist(int id, int userid) async {
     var url =
-        Uri.parse('http://192.168.0.11:8000/api/addWishlist/${id}/${userid}');
+        Uri.parse('http://192.168.0.104:8000/api/addWishlist/${id}/${userid}');
     await http.post(url);
   }
 

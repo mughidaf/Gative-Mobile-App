@@ -15,7 +15,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> updateUser(String username, String email) async {
     try {
       var url = Uri.parse(
-          'http://192.168.0.11:8000/api/editProfile/${LoggedinUser.id}');
+          'http://192.168.0.104:8000/api/editProfile/${LoggedinUser.id}');
       final respon =
           await http.post(url, body: {'username': username, 'email': email});
       if (respon.statusCode == 200) {
@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
             CircleAvatar(
                 radius: 50,
                 backgroundImage: NetworkImage(
-                    'http://192.168.0.11:8000/api/avatar/${LoggedinUser.id}')),
+                    'http://192.168.0.104:8000/api/avatar/${LoggedinUser.id}')),
             SizedBox(height: 20),
             // ElevatedButton(
             //   onPressed: () {
