@@ -23,7 +23,7 @@ class _forum extends State<forum> {
 
   Future<void> fetchForumData() async {
     final response =
-        await http.get(Uri.parse('http://192.168.0.104:8000/api/forum'));
+        await http.get(Uri.parse('http://192.168.61.198:8000/api/forum'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -37,7 +37,7 @@ class _forum extends State<forum> {
 
   Future<void> deleteForum(int id) async {
     final response = await http.delete(
-      Uri.parse('http://192.168.0.104:8000/api/deleteForum/$id'),
+      Uri.parse('http://192.168.61.198:8000/api/deleteForum/$id'),
     );
     if (response.statusCode == 200) {
       // Forum deleted successfully
@@ -96,7 +96,7 @@ class _forum extends State<forum> {
                 ),
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      "http://192.168.0.104:8000/api/avatar/$userid"),
+                      "http://192.168.61.198:8000/api/avatar/$userid"),
                   backgroundColor: Colors.transparent,
                   radius: 15,
                 ),
@@ -129,7 +129,7 @@ class _forum extends State<forum> {
                           children: [
                             CircleAvatar(
                               backgroundImage: NetworkImage(
-                                  "http://192.168.0.104:8000/api/avatar/${forum['User_id']}"),
+                                  "http://192.168.61.198:8000/api/avatar/${forum['User_id']}"),
                               backgroundColor: Colors.transparent,
                               radius: 25,
                             ),

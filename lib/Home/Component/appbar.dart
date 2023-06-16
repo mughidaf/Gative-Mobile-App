@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<List<Item>> fetchItems() async {
     final response =
-        await http.get(Uri.parse('http://192.168.0.104:8000/api/items'));
+        await http.get(Uri.parse('http://192.168.61.198:8000/api/items'));
 
     if (response.statusCode == 200) {
       // Jika respons API sukses (status code 200), proses data yang diterima
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> addCart(int id, int userid) async {
     var url =
-        Uri.parse('http://192.168.0.104:8000/api/addCart/${id}/${userid}');
+        Uri.parse('http://192.168.61.198:8000/api/addCart/${id}/${userid}');
     var response = await http.post(url);
 
     if (response.statusCode == 200) {
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
             CircleAvatar(
               backgroundImage: NetworkImage(
-                  'http://192.168.0.104:8000/api/avatar/$userid'), //buat foto profil
+                  'http://192.168.61.198:8000/api/avatar/$userid'), //buat foto profil
             ),
             SizedBox(width: 10),
           ],
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                            'http://192.168.0.104:8000/api/avatar/$userid'),
+                            'http://192.168.61.198:8000/api/avatar/$userid'),
                         fit: BoxFit.cover),
                     shape: BoxShape.circle,
                   ),
@@ -290,7 +290,7 @@ class _HomePageState extends State<HomePage> {
                               height: 200,
                               width: 150,
                               child: Image.network(
-                                "http://192.168.0.104:8000/api/gambarBarang/${items[index].id}",
+                                "http://192.168.61.198:8000/api/gambarBarang/${items[index].id}",
                                 fit: BoxFit.cover,
                               ),
                             ),

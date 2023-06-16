@@ -33,7 +33,7 @@ class _incomment extends State<incomment> {
 
   Future<void> fetchForumData() async {
     final response = await http.get(
-        Uri.parse('http://192.168.0.104:8000/api/forum/${widget.post_id}'));
+        Uri.parse('http://192.168.61.198:8000/api/forum/${widget.post_id}'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -49,7 +49,7 @@ class _incomment extends State<incomment> {
 
   Future<void> fetchRepliesData() async {
     final response = await http.get(Uri.parse(
-        'http://192.168.0.104:8000/api/forum/reply/${widget.post_id}'));
+        'http://192.168.61.198:8000/api/forum/reply/${widget.post_id}'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -95,7 +95,7 @@ class _incomment extends State<incomment> {
                 ),
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      "http://192.168.0.104:8000/api/avatar/$userid"),
+                      "http://192.168.61.198:8000/api/avatar/$userid"),
                   backgroundColor: Colors.transparent,
                   radius: 15,
                 ),
@@ -153,7 +153,7 @@ class _incomment extends State<incomment> {
                                 children: [
                                   CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                        'http://192.168.0.104:8000/api/avatar/$forumuser'),
+                                        'http://192.168.61.198:8000/api/avatar/$forumuser'),
                                     backgroundColor: Colors.transparent,
                                     radius: 25,
                                   ),
@@ -264,7 +264,7 @@ class _incomment extends State<incomment> {
                                         ),
                                         CircleAvatar(
                                           backgroundImage: NetworkImage(
-                                              'http://192.168.0.104:8000/api/avatar/${reply['user_id']}'),
+                                              'http://192.168.61.198:8000/api/avatar/${reply['user_id']}'),
                                           backgroundColor: Colors.transparent,
                                           radius: 15,
                                         ),

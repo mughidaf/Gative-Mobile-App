@@ -10,7 +10,7 @@ class RegisterPage extends StatelessWidget {
   Future<bool> registerUser(
       String name, String email, String username, String password) async {
     var url = Uri.parse(
-        'http://192.168.0.104:8000/api/register'); // Ganti URL dengan endpoint registrasi API Laravel Anda
+        'http://192.168.61.198:8000/api/register'); // Ganti URL dengan endpoint registrasi API Laravel Anda
 
     var response = await http.post(
       url,
