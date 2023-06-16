@@ -284,7 +284,7 @@ class _incomment extends State<incomment> {
                                                 ),
                                               ),
                                               Text(
-                                                reply['reply_content'],
+                                                reply['answers'],
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ),
