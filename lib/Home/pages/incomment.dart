@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
+import 'package:gative_mobile_ver/Models/Network.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -32,8 +33,8 @@ class _incomment extends State<incomment> {
   }
 
   Future<void> fetchForumData() async {
-    final response = await http.get(
-        Uri.parse('http://192.168.61.198:8000/api/forum/${widget.post_id}'));
+    final response = await http
+        .get(Uri.parse('http://${Network.ip}/api/forum/${widget.post_id}'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -48,8 +49,8 @@ class _incomment extends State<incomment> {
   }
 
   Future<void> fetchRepliesData() async {
-    final response = await http.get(Uri.parse(
-        'http://192.168.61.198:8000/api/forum/reply/${widget.post_id}'));
+    final response = await http.get(
+        Uri.parse('http://${Network.ip}/api/forum/reply/${widget.post_id}'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -94,8 +95,8 @@ class _incomment extends State<incomment> {
                   width: 10,
                 ),
                 CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "http://192.168.61.198:8000/api/avatar/$userid"),
+                  backgroundImage:
+                      NetworkImage("http://${Network.ip}/api/avatar/$userid"),
                   backgroundColor: Colors.transparent,
                   radius: 15,
                 ),
@@ -153,7 +154,7 @@ class _incomment extends State<incomment> {
                                 children: [
                                   CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                        'http://192.168.61.198:8000/api/avatar/$forumuser'),
+                                        'http://${Network.ip}/api/avatar/$forumuser'),
                                     backgroundColor: Colors.transparent,
                                     radius: 25,
                                   ),
@@ -264,7 +265,7 @@ class _incomment extends State<incomment> {
                                         ),
                                         CircleAvatar(
                                           backgroundImage: NetworkImage(
-                                              'http://192.168.61.198:8000/api/avatar/${reply['user_id']}'),
+                                              'http://${Network.ip}/api/avatar/${reply['user_id']}'),
                                           backgroundColor: Colors.transparent,
                                           radius: 15,
                                         ),

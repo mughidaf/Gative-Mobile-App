@@ -8,6 +8,7 @@ import 'package:gative_mobile_ver/Home/pages/cartpage.dart';
 import 'package:gative_mobile_ver/Home/Component/drawer.dart';
 import 'package:gative_mobile_ver/Models/Item.dart';
 import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
+import 'package:gative_mobile_ver/Models/Network.dart';
 import 'package:gative_mobile_ver/Models/SelectedItem.dart';
 import 'package:gative_mobile_ver/Models/UserController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<List<Item>> fetchItems() async {
     final response =
-        await http.get(Uri.parse('http://192.168.61.198:8000/api/items'));
+        await http.get(Uri.parse('http://${Network.ip}/api/items'));
 
     if (response.statusCode == 200) {
       // Jika respons API sukses (status code 200), proses data yang diterima
@@ -85,8 +86,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> addCart(int id, int userid) async {
-    var url =
-        Uri.parse('http://192.168.61.198:8000/api/addCart/${id}/${userid}');
+    var url = Uri.parse('http://${Network.ip}/api/addCart/${id}/${userid}');
     var response = await http.post(url);
 
     if (response.statusCode == 200) {
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
             CircleAvatar(
               backgroundImage: NetworkImage(
-                  'http://192.168.61.198:8000/api/avatar/$userid'), //buat foto profil
+                  'http://${Network.ip}/api/avatar/$userid'), //buat foto profil
             ),
             SizedBox(width: 10),
           ],
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                            'http://192.168.61.198:8000/api/avatar/$userid'),
+                            'http://${Network.ip}/api/avatar/$userid'),
                         fit: BoxFit.cover),
                     shape: BoxShape.circle,
                   ),
@@ -290,7 +290,7 @@ class _HomePageState extends State<HomePage> {
                               height: 200,
                               width: 150,
                               child: Image.network(
-                                "http://192.168.61.198:8000/api/gambarBarang/${items[index].id}",
+                                "http://${Network.ip}/api/gambarBarang/${items[index].id}",
                                 fit: BoxFit.cover,
                               ),
                             ),

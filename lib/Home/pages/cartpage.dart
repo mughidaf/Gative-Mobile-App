@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:gative_mobile_ver/Home/pages/WishlistPage.dart';
 import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
+import 'package:gative_mobile_ver/Models/Network.dart';
 import 'package:gative_mobile_ver/Models/UserController.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -38,8 +39,8 @@ class _CartPageState extends State<CartPage> {
   }
 
   Future<List<Item>> fetchItems(int id) async {
-    final response = await http
-        .get(Uri.parse('http://192.168.61.198:8000/api/cartPage/${id}'));
+    final response =
+        await http.get(Uri.parse('http://${Network.ip}/api/cartPage/${id}'));
 
     if (response.statusCode == 200) {
       // Jika respons API sukses (status code 200), proses data yang diterima
@@ -84,7 +85,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   void deleteCartItem(int id) async {
-    String apiUrl = 'http://192.168.61.198:8000/api/deleteCart/$id';
+    String apiUrl = 'http://${Network.ip}/api/deleteCart/$id';
 
     var response = await http.delete(Uri.parse(apiUrl));
 
@@ -98,14 +99,12 @@ class _CartPageState extends State<CartPage> {
   }
 
   Future<void> addWishlist(int id, int userid) async {
-    var url =
-        Uri.parse('http://192.168.61.198:8000/api/addWishlist/${id}/${userid}');
+    var url = Uri.parse('http://${Network.ip}/api/addWishlist/${id}/${userid}');
     await http.post(url);
   }
 
   Future<void> deleteAllCarts(int userId) async {
-    final url =
-        Uri.parse('http://192.168.61.198:8000/api/deleteAllCart/$userId');
+    final url = Uri.parse('http://${Network.ip}/api/deleteAllCart/$userId');
 
     try {
       final response = await http.delete(url);
@@ -181,7 +180,7 @@ class _CartPageState extends State<CartPage> {
                                 width: 80,
                                 margin: EdgeInsets.only(right: 15),
                                 child: Image.network(
-                                    "http://192.168.61.198:8000/api/gambarBarang/${items[index].id}"),
+                                    "http://${Network.ip}/api/gambarBarang/${items[index].id}"),
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),

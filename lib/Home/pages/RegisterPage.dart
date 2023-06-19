@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gative_mobile_ver/Models/Network.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class RegisterPage extends StatelessWidget {
   Future<bool> registerUser(
       String name, String email, String username, String password) async {
     var url = Uri.parse(
-        'http://192.168.61.198:8000/api/register'); // Ganti URL dengan endpoint registrasi API Laravel Anda
+        'http://${Network.ip}/api/register'); // Ganti URL dengan endpoint registrasi API Laravel Anda
 
     var response = await http.post(
       url,

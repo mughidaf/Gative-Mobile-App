@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:gative_mobile_ver/Models/Network.dart';
 import 'package:gative_mobile_ver/Models/UserController.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<bool> login(String username, String password) async {
     try {
       var url = Uri.parse(
-          'http://192.168.61.198:8000/api/login'); // Ganti dengan URL API login Laravel kamu
+          'http://${Network.ip}/api/login'); // Ganti dengan URL API login Laravel kamu
       var response = await http.post(
         url,
         body: {

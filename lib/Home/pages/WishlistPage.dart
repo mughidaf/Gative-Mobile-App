@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gative_mobile_ver/Models/Item.dart';
 import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
+import 'package:gative_mobile_ver/Models/Network.dart';
 import 'package:http/http.dart' as http;
 import '../Component/WishlistItem.dart';
 
@@ -20,7 +21,7 @@ class _WishlistPageState extends State<WishlistPage> {
 
   Future<List<Item>> fetchItems(int id) async {
     final response = await http
-        .get(Uri.parse('http://192.168.61.198:8000/api/wishlistPage/${id}'));
+        .get(Uri.parse('http://${Network.ip}/api/wishlistPage/${id}'));
 
     if (response.statusCode == 200) {
       // Jika respons API sukses (status code 200), proses data yang diterima
@@ -62,7 +63,7 @@ class _WishlistPageState extends State<WishlistPage> {
   }
 
   void deleteWishItem(int id) async {
-    String apiUrl = 'http://192.168.61.198:8000/api/deleteWish/$id';
+    String apiUrl = 'http://${Network.ip}/api/deleteWish/$id';
 
     var response = await http.delete(Uri.parse(apiUrl));
 
@@ -132,7 +133,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                 width: 80,
                                 margin: EdgeInsets.only(right: 15),
                                 child: Image.network(
-                                    "http://192.168.61.198:8000/api/gambarBarang/${items[index].id}"),
+                                    "http://${Network.ip}/api/gambarBarang/${items[index].id}"),
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),

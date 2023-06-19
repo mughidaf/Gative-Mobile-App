@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gative_mobile_ver/Home/pages/incomment.dart';
 import 'package:gative_mobile_ver/Models/LoggedinUser.dart';
+import 'package:gative_mobile_ver/Models/Network.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -23,7 +24,7 @@ class _forum extends State<forum> {
 
   Future<void> fetchForumData() async {
     final response =
-        await http.get(Uri.parse('http://192.168.61.198:8000/api/forum'));
+        await http.get(Uri.parse('http://${Network.ip}/api/forum'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -37,7 +38,7 @@ class _forum extends State<forum> {
 
   Future<void> deleteForum(int id) async {
     final response = await http.delete(
-      Uri.parse('http://192.168.61.198:8000/api/deleteForum/$id'),
+      Uri.parse('http://${Network.ip}/api/deleteForum/$id'),
     );
     if (response.statusCode == 200) {
       // Forum deleted successfully
@@ -95,8 +96,8 @@ class _forum extends State<forum> {
                   width: 10,
                 ),
                 CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "http://192.168.61.198:8000/api/avatar/$userid"),
+                  backgroundImage:
+                      NetworkImage("http://${Network.ip}/api/avatar/$userid"),
                   backgroundColor: Colors.transparent,
                   radius: 15,
                 ),
@@ -129,7 +130,7 @@ class _forum extends State<forum> {
                           children: [
                             CircleAvatar(
                               backgroundImage: NetworkImage(
-                                  "http://192.168.61.198:8000/api/avatar/${forum['User_id']}"),
+                                  "http://${Network.ip}/api/avatar/${forum['User_id']}"),
                               backgroundColor: Colors.transparent,
                               radius: 25,
                             ),
