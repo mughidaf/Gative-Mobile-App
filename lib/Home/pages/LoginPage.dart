@@ -18,8 +18,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<bool> login(String username, String password) async {
     try {
-      var url = Uri.parse(
-          'http://${Network.ip}/api/login'); // Ganti dengan URL API login Laravel kamu
+      var url = Uri.parse('http://${Network.ip}/api/login');
       var response = await http.post(
         url,
         body: {
